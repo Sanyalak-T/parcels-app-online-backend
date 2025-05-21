@@ -1,0 +1,41 @@
+### register a new user
+POST http://localhost:3030/auth/register
+Content-Type: application/json
+
+{
+    "userName": "john",
+    "email": "john@gmail.com",
+    "password": "12345"
+}
+
+### Login with the registered user
+POST http://localhost:3030/auth/login
+Content-Type: application/json
+
+{
+    "email": "john@gmail.com",
+    "password": "67890"
+}
+
+### get users
+GET http://localhost:3030/auth/users/
+
+### this here next step...
+
+### delete
+DELETE http://localhost:3030/auth/users/682c6c93dc4b0cb1fe38523e
+
+### Logout
+POST http://localhost:3030/auth/logout
+Content-Type: application/json
+
+### update password a user
+POST http://localhost:3030/auth/users/update-password
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2ODJjNmRiMDMyNGMxZGYwMDJkNjYxOTQiLCJlbWFpbCI6ImpvaG5AZ21haWwuY29tIiwiaWF0IjoxNzQ3NzQyMTMwLCJleHAiOjE3NDc3NDU3MzB9.UFLKay1ffHYY1mx1DiowN0xiyTxEDpGnCASCyn12aQA
+
+{
+    "currentPassword": "12345",
+    "newPassword": "67890",
+    "confirmNewPassword": "67890"
+}
