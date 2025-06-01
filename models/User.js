@@ -15,6 +15,9 @@ const UserSchema = new Schema({
 UserSchema.pre("save", async function (next) {
   if (!this.isModified("password")) return next();
 
+  if (!this.password) {
+    return next(new Error("Password is missing for hashing."));
+  }
   // salt => กำหนดให้เข้ารหัสกี่รอบ ปกติ 10 รอบ
   this.password = await bcrypt.hash(this.password, 10);
   next();

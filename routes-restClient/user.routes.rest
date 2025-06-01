@@ -23,7 +23,7 @@ GET http://localhost:3030/auth/users/
 ### this here next step...
 
 ### delete
-DELETE http://localhost:3030/auth/users/682c6c93dc4b0cb1fe38523e
+DELETE http://localhost:3030/auth/users/682c6db0324c1df002d66194
 
 ### Logout
 POST http://localhost:3030/auth/logout

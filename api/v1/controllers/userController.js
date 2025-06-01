@@ -11,6 +11,7 @@ export const createUser = async (req, res) => {
       error: true,
       message: "All fields are required",
     });
+    return;
   }
 
   try {
@@ -125,7 +126,7 @@ export const deleteUser = async (req, res) => {
   }
 };
 
-// update password a user
+// update or change password a user
 export const updatePasswordUser = async (req, res) => {
   const { currentPassword, newPassword } = req.body;
   const email = req.user.email;
@@ -160,6 +161,42 @@ export const updatePasswordUser = async (req, res) => {
       error: true,
       message: "Failed to update password",
       details: err.error,
+    });
+  }
+};
+
+// forgot password a user with reset password.
+export const resetPassword = async (req, res) => {
+  const { email, password } = req.body;
+
+  if (!email || !password) {
+    return res.status(400).json({
+      error: true,
+      message: "Email และ Password ต้องไม่ว่าง",
+    });
+  }
+
+  try {
+    const user = await User.findOne({ email });
+    if (!user) {
+      return res.status(400).json({
+        error: true,
+        message: "Invalid or Not match email",
+      });
+    }
+
+    user.password = password;
+    await user.save();
+
+    res.status(200).json({
+      error: false,
+      message: "Password reset successful",
+    });
+  } catch (err) {
+    res.status(500).json({
+      error: true,
+      message: "Error resetting password",
+      details: err.message,
     });
   }
 };

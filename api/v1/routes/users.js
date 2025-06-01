@@ -5,6 +5,7 @@ import {
   logoutUser,
   getUsers,
   deleteUser,
+  resetPassword,
   updatePasswordUser,
 } from "../controllers/userController.js";
 import { authUser } from "../../../middleware/auth.js";
@@ -28,5 +29,8 @@ router.delete("/auth/users/:id", deleteUser);
 
 // update password a user
 router.post("/auth/users/update-password", authUser, updatePasswordUser);
+
+// reset password
+router.post("/auth/reset-password", resetPassword);
 
 export default router;
