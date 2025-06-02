@@ -3,6 +3,8 @@ import dotenv from "dotenv";
 import mongoose from "mongoose";
 import cors from "cors";
 import userRoutes from "./api/v1/allRoutes.js";
+import organizationRoutes from "./api/v1/allRoutes.js";
+import parcelRoutes from "./api/v1/allRoutes.js";
 
 dotenv.config();
 const app = express();
@@ -18,6 +20,8 @@ app.use(cors(corsOptions));
 app.use(express.json());
 
 app.use("/", userRoutes());
+app.use("/", organizationRoutes());
+app.use("/", parcelRoutes());
 app.get("/", (req, res) => {
   res.send("HOME PAGE");
 });
