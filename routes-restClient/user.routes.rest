@@ -13,8 +13,8 @@ POST http://localhost:3030/auth/login
 Content-Type: application/json
 
 {
-    "email": "jane@gmail.com",
-    "password": "12345"
+    "email": "janny@gmail.com",
+    "password": "67890"
 }
 
 ### get users
@@ -39,3 +39,8 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2ODJjN
     "newPassword": "67890",
     "confirmNewPassword": "67890"
 }
+
+### get a profile user
+GET http://localhost:3030/auth/profile
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2ODNiMjUzZmJlMjRjYWYzN2U3MWFkMDIiLCJlbWFpbCI6ImphbmVAZ21haWwuY29tIiwiaWF0IjoxNzQ4ODU0NTk2LCJleHAiOjE3NDg4NTgxOTZ9.Ze_fHx2h4WO8AHwR6Bk15myOUCeHtquB5-NOCdxfvHo

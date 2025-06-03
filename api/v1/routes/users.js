@@ -7,6 +7,7 @@ import {
   deleteUser,
   resetPassword,
   updatePasswordUser,
+  getProfile,
 } from "../controllers/userController.js";
 import { authUser } from "../../../middleware/auth.js";
 
@@ -32,5 +33,8 @@ router.post("/auth/users/update-password", authUser, updatePasswordUser);
 
 // reset password
 router.post("/auth/reset-password", resetPassword);
+
+// get a profile user
+router.get("/auth/profile", authUser, getProfile);
 
 export default router;
