@@ -172,7 +172,7 @@ export const resetPassword = async (req, res) => {
   if (!email || !password) {
     return res.status(400).json({
       error: true,
-      message: "Email และ Password ต้องไม่ว่าง",
+      message: "All fields are required",
     });
   }
 

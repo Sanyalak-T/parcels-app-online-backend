@@ -2,8 +2,13 @@ import { Organization } from "../../../models/Organization.js";
 
 // create a organization
 export const createOrganization = async (req, res) => {
-  const { higherSection, organizationName, department, parcelType, orgRemark } =
-    req.body;
+  const {
+    higherSection,
+    organizationName,
+    departmentName,
+    parcelType,
+    orgRemark,
+  } = req.body;
 
   const userId = req.user.user._id; // logged-in user's MongoDB _id
 
@@ -21,7 +26,7 @@ export const createOrganization = async (req, res) => {
     });
   }
 
-  if (!department) {
+  if (!departmentName) {
     return res.status(400).json({
       error: true,
       message: "Department is required",
@@ -32,7 +37,7 @@ export const createOrganization = async (req, res) => {
     const organization = await Organization.create({
       higherSection,
       organizationName,
-      department,
+      departmentName,
       parcelType,
       orgRemark,
       userId, //Save user as ObjectId reference
@@ -60,6 +65,32 @@ export const getOrganizations = async (req, res) => {
       error: false,
       organizations,
       message: "All organization retrieved successfully",
+    });
+  } catch (err) {
+    return res.status(500).json({
+      error: true,
+      message: "Internal Server Error",
+      details: err.message,
+    });
+  }
+};
+
+// get a organization
+export const getOrganization = async (req, res) => {
+  const id = req.params.id;
+  try {
+    const organization = await Organization.findOne({ _id: id });
+    if (!organization) {
+      return res.status(404).json({
+        error: true,
+        message: "Organization not found",
+      });
+    }
+
+    return res.json({
+      error: false,
+      organization,
+      message: "Organization retrieved successfully",
     });
   } catch (err) {
     return res.status(500).json({

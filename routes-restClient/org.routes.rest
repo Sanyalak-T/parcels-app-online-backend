@@ -1,17 +1,20 @@
 ### create a orgainzation
 POST http://localhost:3030/auth/add-organization
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2ODNiMjUzZmJlMjRjYWYzN2U3MWFkMDIiLCJlbWFpbCI6ImphbmVAZ21haWwuY29tIiwiaWF0IjoxNzQ4Nzc0Mjc4LCJleHAiOjE3NDg3Nzc4Nzh9.DHWQn4VFiH0YvOakz83XrCykXmI_OVfm8ysOTxEa_9A
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2ODNiMjUzZmJlMjRjYWYzN2U3MWFkMDIiLCJlbWFpbCI6ImphbmVAZ21haWwuY29tIiwiaWF0IjoxNzQ5MDI2OTU1LCJleHAiOjE3NDkwMzA1NTV9.ES3Z1UOcw02E5T7L63f2-KjwlfaxS1lTSUgB2eOmWYw
 
 {
-    "higherSection": "Head hospital3",
-    "organizationName": "Hospital Name3",
-    "department": "Meeting Room",
-    "orgRemark": "testing system"
+    "higherSection": "Head hospital4",
+    "organizationName": "Hospital Name4",
+    "departmentName": "Meeting Room4",
+    "orgRemark": "testing system4"
 }
 
 ### get all organizations not protact routes
 GET http://localhost:3030/get-all-organization
+
+### get a organization
+GET http://localhost:3030/get-organization/68403d25d53f58e2ed1cbce4
 
 ### update a organization
 PUT http://localhost:3030/edit-organization/683c2f259f3c91701683064d
@@ -20,9 +23,9 @@ Content-Type: application/json
 {
     "higherSection": "Head hospital2",
     "organizationName": "Hospital Name2",
-    "department": "Meeting Room",
+    "departmentName": "Meeting Room",
     "orgRemark": "testing system"
 }
 
 ### delete a organization
-DELETE http://localhost:3030/delete-orgainzation/683c3154aa45fdab02291d3e
+DELETE http://localhost:3030/delete-organization/683c3154aa45fdab02291d3e
