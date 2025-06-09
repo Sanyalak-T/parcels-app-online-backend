@@ -5,6 +5,7 @@ import cors from "cors";
 import userRoutes from "./api/v1/allRoutes.js";
 import organizationRoutes from "./api/v1/allRoutes.js";
 import parcelRoutes from "./api/v1/allRoutes.js";
+import departmentRoutes from "./api/v1/allRoutes.js";
 
 dotenv.config();
 const app = express();
@@ -22,6 +23,7 @@ app.use(express.json());
 app.use("/", userRoutes());
 app.use("/", organizationRoutes());
 app.use("/", parcelRoutes());
+app.use("/", departmentRoutes());
 app.get("/", (req, res) => {
   res.send("HOME PAGE");
 });
@@ -31,11 +33,15 @@ app.get("/", (req, res) => {
     await mongoose.connect(process.env.MONGO_URI);
     console.log("Connected to Mongo Database😊");
   } catch (error) {
-    console.log(`MongoDB connection error ${error}`);
+    console.log(
+      `MongoDB connection error ${error}`
+    );
     process.exit(1);
   }
 })();
 
 app.listen(PORT, () => {
-  console.log(`Server is running on http://localhost:${PORT}`);
+  console.log(
+    `Server is running on http://localhost:${PORT}`
+  );
 });

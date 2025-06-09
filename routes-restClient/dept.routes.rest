@@ -1,0 +1,26 @@
+### create a department
+POST http://localhost:3030/add-department
+Content-Type: application/json
+
+{
+    "departmentName": "testing 1",
+    "departmentRemark": "testing 1"
+}
+
+### get all departments not protact routes
+GET http://localhost:3030/get-all-department
+
+### get a department
+GET http://localhost:3030/get-department/684703651745d73635579e92
+
+### update a department
+PUT http://localhost:3030/edit-department/684703651745d73635579e92
+Content-Type: application/json
+
+{
+    "departmentName": "Management-Dept",
+    "departmentRemark": "testing system 1"
+}
+
+### delete a department
+DELETE http://localhost:3030/delete-department/68470957d9a03d489341c005
