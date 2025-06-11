@@ -3,11 +3,11 @@ POST http://localhost:3030/add-parcel
 Content-Type: application/json
 
 {
-    "numberOrCode": "M-003",
+    "numberOrCode": "M-004",
     "parcelType": "equipment type",
-    "parcelName": "Computer office 2",
-    "brandTypeModelSizeDescrip": "Sony",
-    "unitPrice": 15000,
+    "parcelName": "Computer office 4",
+    "brandTypeModelSizeDescrip": "Lenovo",
+    "unitPrice": 20000,
     "howToGet": "Money Support 2025",
     "ParcelRemark": "Testing System"
 }
@@ -16,7 +16,7 @@ Content-Type: application/json
 GET http://localhost:3030/get-all-parcel
 
 ### update a parcels
-PUT http://localhost:3030/edit-parcle/683c913c5cdf2c045b0c02b5
+PUT http://localhost:3030/edit-parcle/68499b217da3d215b0c07dd8
 Content-Type: application/json
 
 {
@@ -30,4 +30,4 @@ Content-Type: application/json
 }
 
 ### delete a parcel
-DELETE http://localhost:3030/delete-parcle/683c94a9ec8a24b95c9824a0
+DELETE http://localhost:3030/delete-parcle/68499b217da3d215b0c07dd8
