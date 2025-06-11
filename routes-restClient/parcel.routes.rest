@@ -9,7 +9,7 @@ Content-Type: application/json
     "brandTypeModelSizeDescrip": "Lenovo",
     "unitPrice": 20000,
     "howToGet": "Money Support 2025",
-    "ParcelRemark": "Testing System"
+    "parcelRemark": "Testing System"
 }
 
 ### get parcels

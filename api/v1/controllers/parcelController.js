@@ -1,7 +1,7 @@
 import { Parcel } from "../../../models/Parcel.js";
 
 // create a parcel
-export const createParcle = async (req, res) => {
+export const createParcel = async (req, res) => {
   const {
     arrivalDate,
     numberOrCode,
@@ -47,13 +47,14 @@ export const createParcle = async (req, res) => {
 };
 
 // get parcels
-export const getParcle = async (req, res) => {
+export const getParcel = async (req, res) => {
   try {
-    const parcles = await Parcel.find();
+    const parcels = await Parcel.find();
     res.status(200).json({
       error: false,
-      parcles,
-      message: "All parels retrieved successfully",
+      parcels,
+      message:
+        "All parels retrieved successfully",
     });
   } catch (err) {
     return res.status(500).json({
@@ -65,15 +66,18 @@ export const getParcle = async (req, res) => {
 };
 
 // update a parcels
-export const updateParcle = async (req, res) => {
+export const updateParcel = async (req, res) => {
   const payload = req.body;
   const { id } = req.params;
 
   try {
-    const parcle = await Parcel.findByIdAndUpdate(id, { $set: payload });
+    const parcel = await Parcel.findByIdAndUpdate(
+      id,
+      { $set: payload }
+    );
     res.status(200).json({
       error: false,
-      parcle,
+      parcel,
       message: "update a parcel successfully",
     });
   } catch (err) {
@@ -86,7 +90,7 @@ export const updateParcle = async (req, res) => {
 };
 
 // delete a organization
-export const deleteParcle = async (req, res) => {
+export const deleteParcel = async (req, res) => {
   const { id } = req.params;
 
   try {
