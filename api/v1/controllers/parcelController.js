@@ -13,6 +13,8 @@ export const createParcel = async (req, res) => {
     parcelRemark,
   } = req.body;
 
+  const dateObj = new Date(arrivalDate);
+
   if (!parcelName) {
     return res.status(400).send({
       error: true,
@@ -22,7 +24,7 @@ export const createParcel = async (req, res) => {
 
   try {
     const parcel = await Parcel.create({
-      arrivalDate,
+      dateObj,
       numberOrCode,
       parcelType,
       parcelName,
@@ -47,7 +49,7 @@ export const createParcel = async (req, res) => {
 };
 
 // get parcels
-export const getParcel = async (req, res) => {
+export const getParcels = async (req, res) => {
   try {
     const parcels = await Parcel.find();
     res.status(200).json({
@@ -55,6 +57,34 @@ export const getParcel = async (req, res) => {
       parcels,
       message:
         "All parels retrieved successfully",
+    });
+  } catch (err) {
+    return res.status(500).json({
+      error: true,
+      message: "Internal Server Error",
+      details: err.message,
+    });
+  }
+};
+
+// get a parcel
+export const getParcel = async (req, res) => {
+  const id = req.params.id;
+  try {
+    const parcel = await Parcel.findOne({
+      _id: id,
+    });
+    if (!parcel) {
+      return res.status(404).json({
+        error: true,
+        message: "Parcel not found",
+      });
+    }
+
+    return res.json({
+      error: false,
+      parcel,
+      message: "Parcel retrieved successfully",
     });
   } catch (err) {
     return res.status(500).json({

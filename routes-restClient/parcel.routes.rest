@@ -15,6 +15,9 @@ Content-Type: application/json
 ### get parcels
 GET http://localhost:3030/get-all-parcel
 
+### get a parcel
+GET http://localhost:3030/get-parcel/684ab5c06ebc582cb75ce1ef
+
 ### update a parcels
 PUT http://localhost:3030/edit-parcle/68499b217da3d215b0c07dd8
 Content-Type: application/json
@@ -30,4 +33,4 @@ Content-Type: application/json
 }
 
 ### delete a parcel
-DELETE http://localhost:3030/delete-parcle/68499b217da3d215b0c07dd8
+DELETE http://localhost:3030/delete-parcel/68499adb7da3d215b0c07dd5
