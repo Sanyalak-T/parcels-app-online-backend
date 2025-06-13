@@ -19,18 +19,22 @@ GET http://localhost:3030/get-all-parcel
 GET http://localhost:3030/get-parcel/684ab5c06ebc582cb75ce1ef
 
 ### update a parcels
-PUT http://localhost:3030/edit-parcle/68499b217da3d215b0c07dd8
+PUT http://localhost:3030/edit-parcel/684ab6896ebc582cb75ce1f4
 Content-Type: application/json
 
 {
-    "numberOrCode": "M-002",
+    "numberOrCode": "A-003",
     "parcelType": "equipment type",
-    "parcelName": "Computer office 2",
-    "brandTypeModelSizeDescrip": "Mac Book 2",
-    "unitPrice": 7000,
+    "parcelName": "LenoveName1",
+    "brandTypeModelSizeDescrip": "Lenove",
+    "unitPrice": 37000,
     "howToGet": "Money Support 2024",
     "ParcelRemark": "Testing System"
 }
 
 ### delete a parcel
 DELETE http://localhost:3030/delete-parcel/68499adb7da3d215b0c07dd5
+
+### filter parcels
+# GET http://localhost:3030/filter-parcels?parcelName=
+GET http://localhost:3030/filter-parcels?parcelName=LenoveName1

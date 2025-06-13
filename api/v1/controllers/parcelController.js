@@ -134,3 +134,35 @@ export const deleteParcel = async (req, res) => {
     });
   }
 };
+
+// filter parcels by parcel type, parcel name and date
+export const filterParcel = async (req, res) => {
+  const { parcelType, parcelName, arrivalDate } =
+    req.query;
+  console.log("xxx", parcelName);
+
+  let query = {};
+  if (parcelType) query.parcelType = parcelType;
+  if (parcelName)
+    query.parcelName = {
+      $regex: parcelName,
+      $options: "i",
+    };
+  if (arrivalDate)
+    query.arrivalDate = arrivalDate;
+
+  try {
+    const parcels = await Parcel.find(query);
+    res.status(200).json({
+      error: false,
+      parcels,
+      message: "Parcels retrieved successfully",
+    });
+  } catch (err) {
+    res.status(500).json({
+      error: true,
+      message: "Failed to filter parcels",
+      details: err.message,
+    });
+  }
+};

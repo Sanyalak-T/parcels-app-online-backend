@@ -5,6 +5,7 @@ import {
   getParcel,
   updateParcel,
   deleteParcel,
+  filterParcel,
 } from "../controllers/parcelController.js";
 
 const router = express.Router();
@@ -23,5 +24,8 @@ router.put("/edit-parcel/:id", updateParcel);
 
 // delete a parcle
 router.delete("/delete-parcel/:id", deleteParcel);
+
+// filter parcels
+router.get("/filter-parcels", filterParcel);
 
 export default router;
