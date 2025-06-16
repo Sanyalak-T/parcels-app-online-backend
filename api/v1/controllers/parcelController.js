@@ -145,11 +145,18 @@ export const filterParcel = async (req, res) => {
   if (parcelType) query.parcelType = parcelType;
   if (parcelName)
     query.parcelName = {
-      $regex: parcelName,
+      $regex: parcelName
+        .trim()
+        .replace(/\s+/g, "\\s+"),
       $options: "i",
     };
   if (arrivalDate)
     query.arrivalDate = arrivalDate;
+
+  console.log(
+    "QUERY:",
+    JSON.stringify(query, null, 2)
+  );
 
   try {
     const parcels = await Parcel.find(query);
