@@ -7,15 +7,24 @@ const ParcelSchema = new Schema({
     type: [String],
     required: true,
     enum: ["material type", "equipment type"],
-    default: "material type",
+    default: ["material type"],
   },
-  parcelName: { type: String },
+  parcelName: { type: String, required: true },
   brandTypeModelSizeDescrip: { type: String },
   unitPrice: { type: Number },
   howToGet: { type: String },
   parcelRemark: { type: String },
-  createdOn: { type: Date, default: new Date().getTime() },
-  lastlogin: { type: Date, default: new Date().getTime() },
+  createdOn: {
+    type: Date,
+    default: () => new Date(),
+  },
+  lastlogin: {
+    type: Date,
+    default: () => new Date(),
+  },
 });
 
-export const Parcel = model("Parcel", ParcelSchema);
+export const Parcel = model(
+  "Parcel",
+  ParcelSchema
+);

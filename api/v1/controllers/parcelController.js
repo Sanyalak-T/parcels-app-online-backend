@@ -137,12 +137,18 @@ export const deleteParcel = async (req, res) => {
 
 // filter parcels by parcel type, parcel name and date
 export const filterParcel = async (req, res) => {
-  const { parcelType, parcelName, arrivalDate } =
-    req.query;
+  const {
+    parcelType,
+    parcelName,
+    arrivalDate,
+    page = 1,
+    limit = 2,
+  } = req.query;
   console.log("xxx", parcelName);
 
   let query = {};
-  if (parcelType) query.parcelType = parcelType;
+  if (parcelType)
+    query.parcelType = { $in: [parcelType] }; // เพราะ parcelType เป็น array
   if (parcelName)
     query.parcelName = {
       $regex: parcelName
@@ -150,8 +156,20 @@ export const filterParcel = async (req, res) => {
         .replace(/\s+/g, "\\s+"),
       $options: "i",
     };
-  if (arrivalDate)
-    query.arrivalDate = arrivalDate;
+  if (arrivalDate) {
+    const dateStart = new Date(arrivalDate);
+    const dateEnd = new Date(arrivalDate);
+    dateEnd.setHours(23, 59, 59, 999);
+    query.arrivalDate = {
+      $gte: dateStart,
+      $lte: dateEnd,
+    };
+  }
+
+  const skip = (page - 1) * limit;
+  const total = await Parcel.countDocuments(
+    query
+  );
 
   console.log(
     "QUERY:",
@@ -159,10 +177,15 @@ export const filterParcel = async (req, res) => {
   );
 
   try {
-    const parcels = await Parcel.find(query);
+    const parcels = await Parcel.find(query)
+      .skip(skip)
+      .limit(Number(limit));
     res.status(200).json({
       error: false,
-      parcels,
+      data: parcels,
+      total,
+      page: Number(page),
+      pages: Math.ceil(total / limit),
       message: "Parcels retrieved successfully",
     });
   } catch (err) {
