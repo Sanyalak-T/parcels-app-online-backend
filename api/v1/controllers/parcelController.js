@@ -51,12 +51,45 @@ export const createParcel = async (req, res) => {
 // get parcels
 export const getParcels = async (req, res) => {
   try {
-    const parcels = await Parcel.find();
+    const page = parseInt(req.query.page) || 1;
+    const limit = parseInt(req.query.limit) || 10;
+    const skip = (page - 1) * limit;
+
+    const search =
+      req.query.search ||
+      req.query.parcelName ||
+      ""; //คำค้นหา
+
+    const query = {};
+
+    if (search) {
+      query.$or = [
+        {
+          parcelName: {
+            $regex: search,
+            $options: "i",
+          },
+        },
+      ];
+    }
+
+    const totalItems =
+      await Parcel.countDocuments(query);
+
+    const parcels = await Parcel.find(query)
+      .skip(skip)
+      .limit(limit)
+      .sort({ createdOn: -1 });
     res.status(200).json({
       error: false,
       parcels,
-      message:
-        "All parels retrieved successfully",
+      pagination: {
+        totalItems,
+        totalPages: Math.ceil(totalItems / limit),
+        currentPage: page,
+        limit,
+      },
+      message: "parels retrieved successfully",
     });
   } catch (err) {
     return res.status(500).json({
@@ -144,7 +177,6 @@ export const filterParcel = async (req, res) => {
     page = 1,
     limit = 2,
   } = req.query;
-  console.log("xxx", parcelName);
 
   let query = {};
   if (parcelType)
@@ -171,10 +203,10 @@ export const filterParcel = async (req, res) => {
     query
   );
 
-  console.log(
-    "QUERY:",
-    JSON.stringify(query, null, 2)
-  );
+  // console.log(
+  //   "QUERY:",
+  //   JSON.stringify(query, null, 2)
+  // );
 
   try {
     const parcels = await Parcel.find(query)

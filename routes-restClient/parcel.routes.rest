@@ -35,6 +35,10 @@ Content-Type: application/json
 ### delete a parcel
 DELETE http://localhost:3030/delete-parcel/68499adb7da3d215b0c07dd5
 
-### filter parcels
+### filter parcels on parcel report
 # GET http://localhost:3030/filter-parcels?parcelName=
 GET http://localhost:3030/filter-parcels?parcelName=LenoveName1
+
+### filter parcels on parcel page
+GET http://localhost:3030/get-All-parcel?page=1&limit=2&search=Accounting%20Computer
+# GET http://localhost:3030/get-All-parcel?page=1&limit=2

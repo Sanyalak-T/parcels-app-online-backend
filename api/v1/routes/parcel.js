@@ -25,7 +25,10 @@ router.put("/edit-parcel/:id", updateParcel);
 // delete a parcle
 router.delete("/delete-parcel/:id", deleteParcel);
 
-// filter parcels
+// filter parcels on parcel report
 router.get("/filter-parcels", filterParcel);
+
+// filter parcels on parcel page
+// router.get("/serch-parcels", )
 
 export default router;
