@@ -16,8 +16,8 @@ const PORT = process.env.PORT || 3001;
 
 app.use(helmet()); // Middleware for security headers
 const corsOptions = {
-  origin: "http://localhost:5173",
-  // something with jwt ?
+  origin:
+    "parcels-app-online-frontend.vercel.app", //your frontend domain
   credentials: true, //this cookie
 };
 
