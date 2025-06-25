@@ -17,7 +17,7 @@ const PORT = process.env.PORT || 3001;
 app.use(helmet()); // Middleware for security headers
 const corsOptions = {
   origin:
-    "https://parcels-app-online-frontend.vercel.app/", //your frontend domain
+    "https://parcels-app-online-frontend.vercel.app", //your frontend domain
   credentials: true, //this cookie
 };
 
