@@ -18,6 +18,7 @@ app.use(helmet()); // Middleware for security headers
 const corsOptions = {
   origin:
     "https://parcels-app-online-frontend.vercel.app", //your frontend domain
+  // "http://localhost:5173", // local testing
   credentials: true, //this cookie
 };
 

@@ -4,10 +4,10 @@ const ParcelSchema = new Schema({
   arrivalDate: { type: Date, default: Date.now },
   numberOrCode: { type: String },
   parcelType: {
-    type: [String],
+    type: String,
     required: true,
     enum: ["material type", "equipment type"],
-    default: ["material type"],
+    default: "material type",
   },
   parcelName: { type: String, required: true },
   brandTypeModelSizeDescrip: { type: String },

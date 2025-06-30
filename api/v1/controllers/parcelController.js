@@ -133,10 +133,22 @@ export const updateParcel = async (req, res) => {
   const payload = req.body;
   const { id } = req.params;
 
+  const dataToUpdate = { ...payload }; // สร้าง copy เพื่อไม่ให้แก้ไข req.body โดยตรง
+
+  // ตรวจสอบ parcelType:
+  // Mongoose Schema ของคุณเป็น `type: String` แต่ payload ส่งมาเป็น `[ 'equipment type' ]` (Array)
+  // คุณต้องแปลงให้เป็น String ก่อน
+  if (Array.isArray(dataToUpdate.parcelType)) {
+    dataToUpdate.parcelType =
+      dataToUpdate.parcelType[0]; // เลือกค่าแรก
+  }
+
   try {
+    // ทำการอัปเดต Parcel ใน MongoDB
     const parcel = await Parcel.findByIdAndUpdate(
       id,
-      { $set: payload }
+      { $set: dataToUpdate }, // ใช้ updateData ที่มี arrivalDate เป็น Date object
+      { new: true, runValidators: true } // เพิ่ม options: new: true จะคืนค่า document ที่อัปเดตแล้ว, runValidators: true จะรัน validation ที่กำหนดใน schema
     );
     res.status(200).json({
       error: false,
@@ -144,6 +156,10 @@ export const updateParcel = async (req, res) => {
       message: "update a parcel successfully",
     });
   } catch (err) {
+    console.error(
+      "Failed to update a parcel:",
+      err
+    );
     return res.status(500).json({
       error: true,
       message: "Failed to update a parcel",
